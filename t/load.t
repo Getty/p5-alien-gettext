@@ -1,8 +1,13 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::LoadAllModules;
+use Test::More;
 
-BEGIN {
-	all_uses_ok( search_path => 'Alien::gettext' );
+for (qw(
+  Alien::gettext
+)) {
+  use_ok($_);
 }
+
+done_testing;
+
