@@ -1,0 +1,8 @@
+claude: true
+prompt: >
+  You are working on Alien::gettext, a CPAN Alien::Base tools distribution.
+  Read .claude/rules/alien-gettext-rules.md, then pick the highest-priority
+  actionable ticket from the karr board (`karr board`), claim it, and complete
+  it via the alien-gettext-worker agent. Verify build changes with the forced
+  ALIEN_INSTALL_TYPE=share / =system pair before handing off. Never run
+  `dzil release`.
