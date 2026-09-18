@@ -1,0 +1,20 @@
+---
+class: standard
+completed: 2026-09-18T02:58:04Z
+created: 2026-08-31T04:39:01Z
+id: 1
+priority: medium
+started: 2026-09-18T02:50:45Z
+status: done
+tags:
+- docs
+- alien
+title: POD advertises msgmerge, which is absent from alien_bins
+updated: 2026-09-18T02:58:04Z
+---
+
+lib/Alien/gettext.pm POD synopsis/description names msgmerge as a provided tool, but alien_bins in dist.ini does not list it (msgfmt msgfilter msgcmp msgcomm xgettext msgexec msguniq msginit msgunfmt msgconv). The alien_bins list is the authoritative contract. Resolve the drift: either add msgmerge to alien_bins or correct the POD example. Verify the chosen tools install on the share path.
+
+2026-09-18 02:51 Resolved by adding msgmerge to alien_bins (dist.ini) in the msgcmp/msgcomm merge cluster: msgfmt msgfilter msgcmp msgcomm msgmerge xgettext ... POD already named msgmerge, so alien_bins and POD now agree. Changes: added bullet "Add msgmerge to the provided gettext tools" under {{$NEXT}}. Verifying both forced paths (system fails loudly = no system gettext on box; share build downloading+compiling gettext-1.0 from ftp.gnu.org).
+
+2026-09-18 02:56 Done pending review. dist.ini alien_bins now includes msgmerge (after msgcomm); Changes bullet added; POD already listed msgmerge so drift closed. Verification: env ALIEN_INSTALL_TYPE=system dzil test fails loudly (no system gettext on this box, expected per hazard rule); env ALIEN_INSTALL_TYPE=share dzil test PASS - downloaded+built gettext-1.0 from ftp.gnu.org, msgmerge compiled and installed into share bin, t/load.t ok. Not committed (leaving to maintainer); no release.
