@@ -1,0 +1,25 @@
+---
+class: standard
+completed: 2026-09-18T16:18:31Z
+created: 2026-09-18T03:49:01Z
+id: 3
+priority: high
+started: 2026-09-18T03:51:30Z
+status: done
+tags:
+- release-blocker
+title: Next-version computation collides with 2014 tag 0.001
+updated: 2026-09-18T16:18:31Z
+---
+
+Both forced dzil test runs (system and share) log RewriteVersion::Transitional falling back to Git::NextVersion, then build version 0.001 -- the same number as the existing annotated tag 0.001 (tagger message v0.001, dated 2014-09-19, from a real past release).
+
+Root cause: tag_format is the @Author::GETTY default of a bare version with no leading v, but Git::NextVersion's version_regexp defaults to requiring a leading v on the tag, and nothing in dist.ini or the GETTY / Git::VersionManager bundles overrides it to match. Confirmed by reading PluginBundle::Author::GETTY (only sets Git::Tag tag_format) and PluginBundle::Git::VersionManager (does not propagate tag_format into the fallback version provider).
+
+Effect: Git::NextVersion cannot see the 0.001 tag as a version at all, so it falls back to first_version 0.001 again. Its own before_release duplicate-version check uses the same broken regexp, so it will not catch this. Git::Tag's exact-tag-name duplicate check should catch it and abort, but only after build, test, and possibly a CPAN upload has already run, depending on plugin order.
+
+Rest of this pre-release audit is clean: cpanfile has Alien::Base as the runtime dep; dist.ini alien_repo, alien_bins and copyright_year are current; alien_bins and the POD tool set now agree (msgmerge included in both); Changes' unreleased section covers the diff since the 0.001 tag. This version-number collision is the one release-blocking item found.
+
+Suggested fix direction, not applied here, a dist.ini and versioning change for alien-gettext-worker: give Git::NextVersion a version_regexp matching the bare tag format, or pass an explicit V override for the intended next version when releasing. Verify by re-running dzil test and checking that the build-version line no longer says 0.001.
+
+2026-09-18 04:04 Prescribed dist.ini version_regexp fix is not plumbable in @Author::GETTY v0.323 (bundle forwards only a fixed key set; standalone [Git::NextVersion] fatals with set-version-twice = chain duplication). Applied house-canonical fix: our VERSION 0.002 in lib/Alien/gettext.pm completes the RewriteVersion::Transitional transition. Verified dzil build and dzil test both compute 0.002. Not committed; orchestrator owns commit.
