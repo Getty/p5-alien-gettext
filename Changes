@@ -4,3 +4,10 @@ Revision history for Alien-gettext
     - Update dist config to current @Author::GETTY standards
     - Add msgmerge to the provided gettext tools
 
+0.001     2014-09-18 22:37:56Z
+    - Initial release
+    - Install the GNU gettext command-line utilities via Alien::Base,
+      using a system gettext or building it from the GNU FTP source
+    - Tools reached through bin_dir: msgfmt, xgettext, msgcmp, msgcomm,
+      msgfilter, msgexec, msguniq, msginit, msgunfmt, msgconv
+
