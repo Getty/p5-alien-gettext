@@ -1,7 +1,7 @@
 package Alien::gettext;
 # ABSTRACT: Getting latest gettext installed an available
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 use parent 'Alien::Base';
 

@@ -1,5 +1,7 @@
 Revision history for Alien-gettext
 
+{{$NEXT}}
+
 0.002     2026-09-19 02:53:52Z
     - Update dist config to current @Author::GETTY standards
     - Add msgmerge to the provided gettext tools
