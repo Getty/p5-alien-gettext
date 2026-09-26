@@ -36,7 +36,7 @@ principle and lane are in `.claude/rules/alien-gettext-rules.md`.
 | Task | Agent |
 |---|---|
 | Alien config in `dist.ini`, the probe/share build, tool set, `lib/Alien/`, `t/`, POD | `alien-gettext-worker` (default) |
-| Pre-release audit before a CPAN release | `alien-gettext-release-checker` |
+| Commits, `Changes`, card → done, pre-release audit | `alien-gettext-release-manager` |
 
 The agents carry their skills via `briefing.skills` (see `.claude/agents/`); the main
 agent delegates rather than loading them. Tickets live on the repo's `karr` board.
@@ -53,7 +53,7 @@ fresh clone, and a hardlinked `SKILL.md` is edited in place, never with `Edit`/`
 | `perl-alien` | Alien itself: probe/system/share, `install_prop` vs `runtime_prop`, `Test::Alien` |
 | `getty-perl-core` | house Perl conventions |
 | `getty-perl-release-author-getty`, `perl-release-dist-ini` | the `[@Author::GETTY]` bundle and `dist.ini` |
-| `kanban-issues-karr-cli` | the karr board |
+| `kanban-issues-karr-coordination` | the karr board |
 
 `perl-xs` is deliberately **not** linked: this distribution provides executables through
 `bin_dir` and has no Perl/C boundary — no library, no XS, no FFI. Link it only if this
