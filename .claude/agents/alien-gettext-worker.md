@@ -2,7 +2,6 @@
 name: alien-gettext-worker
 description: "Default Alien::gettext worker — implement, refactor, debug and test everything in this single CPAN distribution: the [@Author::GETTY] alien config in dist.ini (alien_repo + alien_bins), the system-vs-share probe, the GNU-FTP download, the msgfmt/xgettext tool set, lib/Alien/gettext.pm, t/ and POD. Pre-loaded with the two install paths, the tools-only bin_dir contract and the Alien::Base::ModuleBuild conventions. Use for any change under dist.ini, lib/Alien/, t/ or the tool set. Leaves a commit-ready tree; never commits — commits belong to alien-gettext-release-manager."
 model: inherit
-allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 briefing:
   skills:
     - alien-gettext-core

@@ -2,7 +2,6 @@
 name: alien-gettext-release-manager
 description: "Owns alien-gettext's commits and release readiness — cuts commits from the worker's commit-ready tree, writes commit messages and Changes entries, moves karr cards to done. Release audit: Alien::gettext before a CPAN release — cpanfile has Alien::Base as the runtime dep, dist.ini carries the [@Author::GETTY] alien config (alien_repo + alien_bins) with copyright_year current, Changes/{{$NEXT}} covers the diff, both install paths (system probe + GNU-FTP share build) run, and the alien_bins tool list agrees with the POD. Workers never commit; this agent does. Never pushes, tags or releases."
 model: sonnet
-allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 briefing:
   skills:
     - getty-git-commit-style
