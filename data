@@ -1,0 +1,24 @@
+---
+class: standard
+created: 2026-10-06T19:40:23Z
+id: 4
+priority: medium
+status: backlog
+tags:
+- alien
+- build
+- security
+- review-2026-10-06
+title: Share build still runs on Alien::Base::ModuleBuild with a plain-http, unpinned
+  download
+updated: 2026-10-06T19:40:23Z
+---
+
+`dist.ini:9` sets `alien_repo = http://ftp.gnu.org/pub/gnu/gettext`; the `[@Author::GETTY]` bundle turns that into a generated `Build.PL` driven by the deprecated `Alien::Base::ModuleBuild` (see the built tree `Alien-gettext-0.002/Build.PL:2,16,19`: `Dist::Zilla::Plugin::Alien v0.024`, `"protocol" => "http"`, `"Alien::Base::ModuleBuild" => "0.002"`).
+
+On a host without a system gettext this means: the newest tarball listed on ftp.gnu.org is fetched over unencrypted http, with no version pin and no digest, then compiled and installed. The sibling `p5-alien-tinycdb` already moved to an alienfile (its k2, done) and tracks the http/digest follow-up as its k3.
+
+Done when: the dist has an `alienfile` (`alien_build = 1`), the share block fetches from `https://ftp.gnu.org/gnu/gettext/` (or pins a version plus sha256 digest), a probe decides system vs share, and `CLAUDE.md` / skill `alien-gettext-core` no longer say there is no alienfile.
+
+---
+Fleet review 2026-10-06 · kind: improvement · confidence: verified
