@@ -1,0 +1,20 @@
+---
+class: standard
+created: 2026-10-06T19:40:28Z
+id: 5
+priority: low
+status: backlog
+tags:
+- tests
+- alien
+- review-2026-10-06
+title: t/load.t never exercises bin_dir or a single gettext tool
+updated: 2026-10-06T19:40:28Z
+---
+
+`t/load.t` is a bare `use_ok('Alien::gettext')`. The whole contract of this tools-Alien is `Alien::gettext->bin_dir` plus the eleven `alien_bins` from `dist.ini:10`, and none of it is asserted - a build that installs no binaries at all passes.
+
+Done when: a test puts `bin_dir` on `PATH` (an empty list on a system install, which is fine) and runs `msgfmt --version` and `xgettext --version` (e.g. `Test::Alien::run_ok`), asserting exit 0 and a version line.
+
+---
+Fleet review 2026-10-06 · kind: test · confidence: verified
