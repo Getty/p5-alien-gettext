@@ -1,0 +1,19 @@
+---
+class: standard
+created: 2026-10-06T19:40:32Z
+id: 6
+priority: low
+status: backlog
+tags:
+- hygiene
+- docs
+- review-2026-10-06
+title: Remove the dead .travis.yml and fix the ABSTRACT typo
+updated: 2026-10-06T19:40:32Z
+---
+
+* `.travis.yml` is tracked and still describes a Travis CI matrix for perl 5.10-5.18 running `dzil smoke`. Nothing uses Travis any more; delete it.
+* `lib/Alien/gettext.pm:2`: `# ABSTRACT: Getting latest gettext installed an available` - "an" should be "and", and the line is what MetaCPAN shows as the dist summary. Suggested: `Find or build the GNU gettext command-line tools`.
+
+---
+Fleet review 2026-10-06 · kind: hygiene · confidence: verified
