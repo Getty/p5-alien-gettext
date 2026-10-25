@@ -33,7 +33,8 @@ env ALIEN_INSTALL_TYPE=system dzil test
 ## Delegation
 
 Delegate behavior-relevant work to the right agent instead of touching it yourself —
-principle and lane are in `.claude/rules/alien-gettext-rules.md`.
+the principle is a shared house rule (skilletor bundle `getty-cpan-dist@getty`); lanes and
+hazards are in `.claude/rules/alien-gettext-rules.md`.
 
 | Task | Agent |
 |---|---|
