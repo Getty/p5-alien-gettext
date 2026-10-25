@@ -1,0 +1,26 @@
+---
+claimed_at: 2026-10-25T05:04:30Z
+claimed_by: offen-2610
+class: standard
+completed: 2026-10-25T05:04:30Z
+created: 2026-10-06T19:40:28Z
+id: 5
+priority: low
+started: 2026-10-25T01:50:21Z
+status: done
+tags:
+- tests
+- alien
+- review-2026-10-06
+title: t/load.t never exercises bin_dir or a single gettext tool
+updated: 2026-10-25T05:04:30Z
+---
+
+`t/load.t` is a bare `use_ok('Alien::gettext')`. The whole contract of this tools-Alien is `Alien::gettext->bin_dir` plus the eleven `alien_bins` from `dist.ini:10`, and none of it is asserted - a build that installs no binaries at all passes.
+
+Done when: a test puts `bin_dir` on `PATH` (an empty list on a system install, which is fine) and runs `msgfmt --version` and `xgettext --version` (e.g. `Test::Alien::run_ok`), asserting exit 0 and a version line.
+
+---
+Fleet review 2026-10-06 · kind: test · confidence: verified
+
+2026-10-25 03:14 Commit cfe8198. t/bin.t (Test::Alien): rot gegen die alte installierte Share-Installation (msgfmt --version scheitert), gruen auf share-Build; system-Pfad nur mit Stub-msgfmt/xgettext geprueft (kein System-gettext auf dieser Box).
