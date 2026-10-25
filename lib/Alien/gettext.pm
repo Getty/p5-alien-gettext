@@ -1,5 +1,5 @@
 package Alien::gettext;
-# ABSTRACT: Getting latest gettext installed an available
+# ABSTRACT: Find or build the GNU gettext command-line tools
 
 our $VERSION = '0.003';
 
