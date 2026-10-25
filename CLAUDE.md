@@ -8,19 +8,21 @@ linkable library, no `cflags`/`libs`, no XS or FFI.
 
 Two install paths, decided at install time: a **system** gettext found by the probe (no
 version floor), or a **share** build that downloads the newest source tarball from
-`ftp.gnu.org` and compiles it (needs network — no bundled tarball). Mechanism, the tool
-set, and the generated-build details: skill `alien-gettext-core`.
+`https://ftp.gnu.org/gnu/gettext/` and compiles it (needs network — no bundled tarball).
+Mechanism, the tool set, and the alienfile details: skill `alien-gettext-core`.
 
 ## Layout
 
 | Path | Holds |
 |---|---|
-| `dist.ini` | every build decision: `[@Author::GETTY]` with `alien_repo` + `alien_bins` |
+| `dist.ini` | `[@Author::GETTY]` with `alien_build = 1` (Alien::Build path) |
+| `alienfile` | probe (system vs share), https download, autoconf build, tool-set check |
 | `lib/Alien/gettext.pm` | `use parent 'Alien::Base'` + POD, no logic |
 | `t/load.t` | `use_ok` of the module (does not exercise either install path) |
+| `t/bin.t` | `bin_dir` on `PATH`, `msgfmt --version` and `xgettext --version` run |
 
-There is **no `alienfile` and no `Build.PL` in the tree** — the `[@Author::GETTY]` bundle
-generates the build from `dist.ini` at `dzil build`. `dzil test` covers whichever path
+The build is the root `alienfile` (Alien::Build); `[@Author::GETTY]` with `alien_build = 1`
+generates the `Makefile.PL` from it at `dzil build`. `dzil test` covers whichever path
 the box lands on, so anything touching the build runs both explicitly:
 
 ```bash
@@ -49,7 +51,7 @@ fresh clone, and a hardlinked `SKILL.md` is edited in place, never with `Edit`/`
 
 | Skill | Covers |
 |---|---|
-| `alien-gettext-core` | this distribution: the two paths, the generated build, the tool set, the `bin_dir` contract |
+| `alien-gettext-core` | this distribution: the two paths, the alienfile, the tool set, the `bin_dir` contract |
 | `perl-alien` | Alien itself: probe/system/share, `install_prop` vs `runtime_prop`, `Test::Alien` |
 | `getty-perl-core` | house Perl conventions |
 | `getty-perl-release-author-getty`, `perl-release-dist-ini` | the `[@Author::GETTY]` bundle and `dist.ini` |

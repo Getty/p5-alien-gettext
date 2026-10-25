@@ -19,7 +19,7 @@ use parent 'Alien::Base';
 =head1 DESCRIPTION
 
 This distribution provides the GNU gettext utilities via L<Alien::Base>. It
-will either use the system gettext if available and recent enough, or download
+will either use the system gettext if available, or download
 and build it from source.
 
 The gettext utilities include C<msgfmt>, C<msgmerge>, C<xgettext>, and other
