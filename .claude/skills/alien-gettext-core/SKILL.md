@@ -40,9 +40,8 @@ intentional and matches the tool-Alien convention — do not "correct" it.
 
 The build lives in the root `alienfile` (Alien::Build). `dist.ini` only says
 `alien_build = 1`; `[@Author::GETTY]` then generates a `Makefile.PL` driven by
-`Alien::Build::MM` at `dzil build`. There is no `Build.PL` and no
-`Alien::Base::ModuleBuild`, and the former `alien_repo` / `alien_bins` keys are gone —
-the tool list is `@bins` in the alienfile (and asserted in `t/bin.t`).
+`Alien::Build::MM` at `dzil build`. The tool list is `@bins` in the alienfile;
+`t/bin.t` runs `msgfmt` and `xgettext` from it.
 
 ## Two install paths
 

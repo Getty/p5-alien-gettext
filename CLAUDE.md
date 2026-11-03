@@ -15,9 +15,12 @@ Mechanism, the tool set, and the alienfile details: skill `alien-gettext-core`.
 
 | Path | Holds |
 |---|---|
-| `dist.ini` | `[@Author::GETTY]` with `alien_build = 1` (Alien::Build path) |
+| `dist.ini` | header + `[@Author::GETTY]` with `alien_build = 1` (Alien::Build path) |
+| `cpanfile` | prerequisites, read through `[Prereqs::FromCPANfile]` |
+| `Changes`, `LICENSE`, `README.md` | changelog, license, readme |
+| `.github/workflows/ci.yml` | CI: one job against the system gettext, one forced share build |
 | `alienfile` | probe (system vs share), https download, autoconf build, tool-set check |
-| `lib/Alien/gettext.pm` | `use parent 'Alien::Base'` + POD, no logic |
+| `lib/Alien/gettext.pm` | `our $VERSION`, `use parent 'Alien::Base'` + POD, no logic |
 | `t/load.t` | `use_ok` of the module (does not exercise either install path) |
 | `t/bin.t` | `bin_dir` on `PATH`, `msgfmt --version` and `xgettext --version` run |
 

@@ -1,6 +1,6 @@
 ---
 name: alien-gettext-worker
-description: "Default Alien::gettext worker — implement, refactor, debug and test everything in this single CPAN distribution: the [@Author::GETTY] alien config in dist.ini (alien_repo + alien_bins), the system-vs-share probe, the GNU-FTP download, the msgfmt/xgettext tool set, lib/Alien/gettext.pm, t/ and POD. Pre-loaded with the two install paths, the tools-only bin_dir contract and the Alien::Base::ModuleBuild conventions. Use for any change under dist.ini, lib/Alien/, t/ or the tool set. Leaves a commit-ready tree; never commits — commits belong to alien-gettext-release-manager."
+description: "Default Alien::gettext worker — implement, refactor, debug and test everything in this single CPAN distribution: the [@Author::GETTY] alien config in dist.ini (alien_build = 1), the root alienfile with its system-vs-share probe, the GNU-FTP download, the msgfmt/xgettext tool set, lib/Alien/gettext.pm, t/ and POD. Pre-loaded with the two install paths, the tools-only bin_dir contract and the Alien::Build conventions. Use for any change under dist.ini, alienfile, lib/Alien/, t/ or the tool set. Leaves a commit-ready tree; never commits — commits belong to alien-gettext-release-manager."
 model: inherit
 briefing:
   skills:
@@ -28,21 +28,19 @@ Never `git commit`: leave the tree commit-ready and report what changed and why,
 
 - **Single repo, single distribution.** No family coordination here. There is no
   sibling repo that owns part of this — everything is in this one dist.
-- **The build is generated from `dist.ini`, not written by hand.** There is no
-  `alienfile` and no `Build.PL` in the tree — the `[@Author::GETTY]` bundle emits
-  `[Alien]` on top of `Alien::Base::ModuleBuild`. To change the build you edit
-  the `alien_repo` / `alien_bins` (and other `alien_*`) keys in `dist.ini`, never
-  a root-level build file. `lib/Alien/gettext.pm` stays `use parent
-  'Alien::Base'` + POD — if a change wants a method there, say why first.
-- **`.claude/` is git-ignored except for a whitelist** in `.gitignore`
-  (`settings.json`, `agents/`, `skills/`, `rules/`, `hooks/`). A new directory
-  under `.claude/` is invisible to git until whitelisted there — check
-  `git status --short` after adding one, not just the file listing.
-- **Skill files under `.claude/skills/` are hardlinks** to `~/dev/skills/…`.
-  Editing one with `Edit`/`Write` detaches the inode and silently forks every
-  other repo's copy; rewrite in place (`cat > path <<'EOF'`) instead. The
-  project-owned `alien-gettext-core` has no link yet — normal edits are fine
-  there.
+- **The build is the root `alienfile` (Alien::Build).** `dist.ini` carries the
+  `[@Author::GETTY]` bundle with `alien_build = 1`; the bundle generates the
+  `Makefile.PL` from the `alienfile` at `dzil build`. The tool list is `@bins` in
+  the `alienfile`. To change the build you edit the `alienfile`, never a generated
+  build file. Prerequisites live in `cpanfile`. `lib/Alien/gettext.pm` stays
+  `use parent 'Alien::Base'` + POD — if a change wants a method there, say why first.
+- **`.claude/` is tracked** (`agents/`, `rules/`, `skills/`, `settings.json`,
+  `skilletor.json`); local overrides and skilletor-generated files are ignored via
+  `.gitignore`. Check `git status --short` after adding files.
+- **Shared skills under `.claude/skills/` are hardlinks** to `~/dev/skills/…`.
+  Editing one with `Edit`/`Write` detaches the inode and forks every other repo's
+  copy; rewrite in place (`cat > path <<'EOF'`) instead. The project-owned
+  `alien-gettext-core` is edited normally.
 
 ## Verification
 
