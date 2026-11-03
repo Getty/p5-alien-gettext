@@ -11,6 +11,6 @@ on 'build' => sub {
 };
 
 on 'test' => sub {
-  requires 'Test::More', '0.96';
   requires 'Test::Alien';
+  requires 'Test::More', '0.96';
 };
