@@ -36,6 +36,10 @@ jobs:
         run: perl -V
       - name: Install system packages
         run: apt-get update && apt-get install -y --no-install-recommends build-essential
+      # Alien::Build adds Mozilla::CA as a dynamic prereq of an https download,
+      # so the static metadata the action installs from lacks it.
+      - name: Install Mozilla::CA (dynamic share-build prereq)
+        run: cpanm -nq Mozilla::CA
       - uses: Getty/p5-dist-zilla-pluginbundle-author-getty/.github/actions/dzil-test@v1
         with:
           install-type: share
