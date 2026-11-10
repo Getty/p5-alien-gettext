@@ -37,10 +37,9 @@ Never `git commit`: leave the tree commit-ready and report what changed and why,
 - **`.claude/` is tracked** (`agents/`, `rules/`, `skills/`, `settings.json`,
   `skilletor.json`); local overrides and skilletor-generated files are ignored via
   `.gitignore`. Check `git status --short` after adding files.
-- **Shared skills under `.claude/skills/` are hardlinks** to `~/dev/skills/…`.
-  Editing one with `Edit`/`Write` detaches the inode and forks every other repo's
-  copy; rewrite in place (`cat > path <<'EOF'`) instead. The project-owned
-  `alien-gettext-core` is edited normally.
+- **Shared skills under `.claude/skills/` are installed by skilletor** and
+  re-rendered on every sync; a change one of them needs goes as a note on your
+  card. The project-owned `alien-gettext-core` is edited here.
 
 ## Verification
 
