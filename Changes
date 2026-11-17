@@ -1,6 +1,6 @@
 Revision history for Alien-gettext
 
-{{$NEXT}}
+0.003     2026-11-17 04:51:12Z
     - Build on Alien::Build with an alienfile instead of the deprecated
       Alien::Base::ModuleBuild; the share build now downloads over https
       from ftp.gnu.org/gnu/gettext/ and builds static internal libraries
