@@ -1,7 +1,7 @@
 package Alien::gettext;
 # ABSTRACT: Find or build the GNU gettext command-line tools
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 use parent 'Alien::Base';
 
